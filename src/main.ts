@@ -66,28 +66,82 @@ function applyCream(input: HTMLInputElement): void {
 }
 
 function applySyrup(input: HTMLInputElement): void {
-  // TODO: implement this function
+  const syrupElements = document.getElementsByClassName("syrup");
+
+  if (syrupElements.length === 0) return;
+
+  const color = syrups[input.value];
+  if (!color) return;
+  for (let i = 0; i < syrupElements.length; i++) {
+    const element = syrupElements[i] as HTMLDivElement;
+    element.style.setProperty("--syrup-color", color);
+  }
 }
 
 function setupSyrupListeners(): void {
-  // TODO: implement this function
-}
+  const selectedRadio = document.querySelector<HTMLInputElement>('input[name="syrup"]:checked');
+  if (selectedRadio) {
+    applySyrup(selectedRadio);
+  }
+  
+  const radioButtons =
+    document.querySelectorAll<HTMLInputElement>('input[name="syrup"]');
 
+  radioButtons.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      applySyrup(radio);
+    });
+  });
+}
 setupSyrupListeners();
 
 function setupCreamListeners(): void {
-  // TODO: implement this function
+  const selectedRadio = document.querySelector<HTMLInputElement>('input[name="cream"]:checked');
+  if (selectedRadio) {
+    applyCream(selectedRadio);
+  }
+
+  const radioButtons =
+    document.querySelectorAll<HTMLInputElement>('input[name="cream"]');
+
+  radioButtons.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      applyCream(radio);
+    });
+  });
 }
 setupCreamListeners();
 
 function setupTemperatureListeners(): void {
-  // TODO: implement this function
-}
+  const selectedRadio = document.querySelector<HTMLInputElement>('input[name="temperature"]:checked');
+  if (selectedRadio) {
+    applyTemperature(selectedRadio);
+  }
 
+  const RadioButtons =
+    document.querySelectorAll<HTMLInputElement>('input[name="temperature"]');
+  
+  RadioButtons.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      applyTemperature(radio);
+    });
+  });
+}
 setupTemperatureListeners();
 
 function setupBaseListeners(): void {
-  // TODO: implement this function
-}
+  const selectedRadio = document.querySelector<HTMLInputElement>('input[name="base"]:checked');
+  if (selectedRadio) {
+    applyBase(selectedRadio);
+  }
 
+  const RadioButtons =
+    document.querySelectorAll<HTMLInputElement>('input[name="base"]');
+
+  RadioButtons.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      applyBase(radio);
+    });
+  });
+}
 setupBaseListeners();
